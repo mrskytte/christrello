@@ -1,0 +1,333 @@
+:root {
+  --bg: #111120;
+  --container: #543864;
+  --font-color: rgb(228, 228, 228);
+  --card-color: #6c4b80;
+  --active-button: #442d52;
+}
+
+button {
+  all: initial;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  color: var(--font-color);
+  background-color: var(--bg);
+  height: 100vh;
+  width: auto;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 5%;
+}
+
+main {
+  height: calc(95% - 4em);
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+main .container {
+  min-width: calc(33% - 4em);
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-height: 100%;
+  background-color: var(--container);
+  margin: 2em;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+main .container .title {
+  margin: 0;
+}
+
+main .container .content {
+  margin-top: 1em;
+  overflow: scroll;
+}
+
+main .container .content .options {
+  opacity: 0;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 1em;
+}
+
+main .container .content .options div {
+  margin: auto;
+  width: 5px;
+  height: 5px;
+  background-color: var(--font-color);
+  border-radius: 50%;
+  margin-top: 0.1em;
+  pointer-events: none;
+}
+
+main .container .content .card {
+  position: relative;
+  padding: 0.5em;
+  padding-right: 2em;
+  background-color: var(--card-color);
+  margin-top: 1em;
+  height: auto;
+  min-height: 3em;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 0px 2px rgba(35, 35, 35, 0.1);
+          box-shadow: 0px 2px 0px 2px rgba(35, 35, 35, 0.1);
+}
+
+main .container .content .card:hover > .options {
+  opacity: 1;
+}
+
+main .container .content .card:hover > .options:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+main .container .content:first-of-type {
+  margin-top: 0;
+}
+
+main .container .container-footer {
+  color: var(--font-color);
+  margin: auto;
+  margin-top: 0.5em;
+  width: 100%;
+  height: auto;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+main .container button {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  color: lightgray;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+main .container button .plus {
+  font-size: 1.3em;
+  font-weight: 300;
+}
+
+main .container button:hover {
+  background-color: var(--active-button);
+}
+
+main .container button.hide {
+  display: none;
+}
+
+main .container .add-new-container button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  height: 2em;
+  width: auto;
+  margin-top: 0.5em;
+}
+
+main .container .add-new-container button.add {
+  background-color: #0f970f;
+}
+
+main .container .add-new-container button.cancel {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main .container .add-new-container button.cancel:hover {
+  background-color: inherit;
+  opacity: 0.8;
+}
+
+main .container .add-new-container.hide {
+  display: none;
+}
+
+.textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1px 6px;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  min-height: 40px;
+  line-height: 20px;
+}
+
+.textarea[contenteditable]:empty::before {
+  content: "Enter title for this card...";
+  color: lightgray;
+  opacity: 0.4;
+}
+
+.card {
+  padding: 0.5em;
+  background-color: var(--card-color);
+  height: auto;
+  border-radius: 5px;
+}
+
+.card:focus {
+  outline: 0.5px solid var(--font-color);
+  -moz-outline-radius: 5px;
+}
+
+#modal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+  opacity: 0.5;
+  z-index: 100;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#modal-bg.hide {
+  display: none;
+}
+
+#modal-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 101;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#modal-container.hide {
+  display: none;
+}
+
+#modal-container #modal {
+  width: 20%;
+  height: auto;
+  background-color: var(--container);
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 1em 0;
+}
+
+#modal-container #modal .close {
+  margin: auto;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--font-color);
+}
+
+#modal-container #modal .close:hover {
+  opacity: 0.8;
+}
+
+#modal-container #modal .buttons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(100px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-column-gap: 0.5em;
+  width: 85%;
+  margin: auto;
+}
+
+#modal-container #modal .buttons button {
+  text-align: center;
+  width: 100%;
+  height: 3em;
+  background-color: #604372;
+  margin: auto;
+  margin-top: 0.5em;
+  color: var(--font-color);
+}
+
+#modal-container #modal .buttons button:hover {
+  opacity: 0.5;
+}
+
+#modal-container #modal .buttons button.edit {
+  grid-column: auto / span 2;
+}
+
+#modal-container #modal .buttons button.edit.active {
+  background-color: #0f970f;
+}
+
+#modal-container #modal .buttons button.delete {
+  background-color: var(--container);
+  opacity: 0.8;
+  grid-column: auto / span 2;
+}
+
+#modal-container #modal .buttons button.delete:hover {
+  background-color: red;
+}
+
+#modal-container #modal .buttons button.hide {
+  display: none;
+}
+
+#modal-container #modal .card {
+  width: 90%;
+  margin: auto;
+  background-color: var(--card-color);
+  -webkit-box-shadow: 0px 2px 0px 2px rgba(35, 35, 35, 0.1);
+          box-shadow: 0px 2px 0px 2px rgba(35, 35, 35, 0.1);
+}
+/*# sourceMappingURL=style.css.map */

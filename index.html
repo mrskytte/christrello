@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christrello</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        Christrello
+      </h1>
+    </header>
+    <main>
+      <div id="modal-bg" class="hide"></div>
+      <div id="modal-container" class="hide">
+        <div id="modal">
+          <button class="close">X</button>
+          <span class="card textarea" role="textbox" contenteditable="false"
+            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
+            sed vero sapiente? Tenetur sit impedit ipsam cum? Praesentium</span
+          >
+          <div class="buttons">
+            <button class="edit">Edit</button>
+            <button class="move-to-do" data-section="to-do">
+              Move to To Do
+            </button>
+            <button class="move-to-progress" data-section="in-progress">
+              Move to In Progress
+            </button>
+            <button class="move-to-done" data-section="done">
+              Move to Done
+            </button>
+            <button class="delete">Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="to-do">
+        <h1 class="title">To Do</h1>
+        <div class="content"></div>
+        <div class="container-footer">
+          <button class="add-new-btn">
+            <span class="plus">+</span> Add another card
+          </button>
+          <div class="add-new-container hide">
+            <p>
+              <span class="card textarea" role="textbox" contenteditable></span>
+            </p>
+            <button class="add">Add card</button>
+            <button class="cancel">X</button>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="in-progress">
+        <h1 class="title">In Progress</h1>
+        <div class="content"></div>
+        <div class="container-footer">
+          <button class="add-new-btn">
+            <span class="plus">+</span> Add another card
+          </button>
+          <div class="add-new-container hide">
+            <p>
+              <span class="card textarea" role="textbox" contenteditable></span>
+            </p>
+            <button class="add">Add card</button>
+            <button class="cancel">X</button>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="done">
+        <h1 class="title">Done</h1>
+        <div class="content"></div>
+        <div class="container-footer">
+          <button class="add-new-btn">
+            <span class="plus">+</span> Add another card
+          </button>
+          <div class="add-new-container hide">
+            <p>
+              <span class="card textarea" role="textbox" contenteditable></span>
+            </p>
+            <button class="add">Add card</button>
+            <button class="cancel">X</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <template>
+      <div class="card">
+        <div class="options">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p class="card-content">
+          hello my peoeple
+        </p>
+      </div>
+    </template>
+    <script src="script.js"></script>
+  </body>
+</html>
