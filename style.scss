@@ -1,7 +1,7 @@
 :root {
   --bg: #111120;
   --container: #543864;
-  --font-color: rgb(228, 228, 228);
+  --font-color: #e4e4e4;
   --card-color: #6c4b80;
   --active-button: #442d52;
 }
@@ -84,6 +84,22 @@ main {
             opacity: 0.7;
           }
         }
+        .card-deadline {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 20%;
+          font-size: 0.8em;
+          background-color: yellow;
+          color: black;
+          border-radius: 5px;
+          padding: 0.3em;
+          margin-top: 1em;
+          cursor: default;
+          &.hidden {
+            display: none;
+          }
+        }
       }
       &:first-of-type {
         margin-top: 0;
@@ -116,6 +132,24 @@ main {
       }
     }
     .add-new-container {
+      .error {
+        display: none;
+        font-size: 0.8em;
+        margin-top: 0.2em;
+        margin-left: 0.3em;
+      }
+      &[data-validity="invalid"] {
+        .textarea {
+          outline: 1px solid red;
+          -moz-outline-radius: 5px;
+        }
+        .error {
+          display: block;
+        }
+        i {
+          visibility: visible;
+        }
+      }
       button {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 1em;
@@ -141,6 +175,7 @@ main {
 }
 
 .textarea {
+  position: relative;
   font-family: inherit;
   font-size: inherit;
   padding: 1px 6px;
@@ -258,4 +293,42 @@ main {
       box-shadow: 0px 2px 0px 2px rgba(35, 35, 35, 0.1);
     }
   }
+}
+
+.add-new-container > form {
+  p {
+    position: relative;
+  }
+  label {
+    display: inline-block;
+    padding: 0.5em;
+  }
+}
+input#deadline {
+  all: initial;
+  display: inline-block;
+  padding: 0.5em;
+  cursor: pointer;
+
+  color: rgba(211, 211, 211, 0.4);
+  &:focus {
+    outline: 0.5px solid var(--font-color);
+    -moz-outline-radius: 5px;
+  }
+}
+
+input#deadline:invalid {
+  border-color: red;
+}
+
+i {
+  visibility: hidden;
+  position: absolute;
+  right: 0.7em;
+  top: 0.7em;
+  color: red;
+}
+
+#done .card .card-deadline {
+  display: none;
 }

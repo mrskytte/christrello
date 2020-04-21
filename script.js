@@ -4,6 +4,7 @@ window.addEventListener("load", init);
 
 const endpoint = "https://frontend-028f.restdb.io/rest/card";
 const apiKey = "5e958922436377171a0c2357";
+const today = new Date();
 
 let currentCard;
 
@@ -11,6 +12,18 @@ function init() {
   activateNewCardBtns();
   activateModalBtns();
   getData();
+  setDate();
+}
+
+function setDate() {
+  const month =
+    today.getMonth() + 1 > 9
+      ? today.getMonth() + 1
+      : `0${today.getMonth() + 1}`;
+  const fullDate = `${today.getFullYear()}-${month}-${today.getDate()}`;
+
+  const dateInputs = document.querySelectorAll("#deadline");
+  dateInputs.forEach((dateInput) => (dateInput.min = fullDate));
 }
 
 async function getData() {
@@ -41,7 +54,26 @@ function placeCard(card) {
   cardClone.querySelector(".card").setAttribute("id", card._id);
 
   cardClone.querySelector(".options").addEventListener("click", openModal);
-
+  if (card.deadline) {
+    const deadlineDate = new Date(card.deadline);
+    const deadline = `${deadlineDate.getDate()} ${deadlineDate.toLocaleString(
+      "default",
+      { month: "short" }
+    )}`;
+    cardClone.querySelector(".card-deadline>p").textContent = deadline;
+    const differenceInTime = today.getTime() - deadlineDate.getTime();
+    const daysToDeadline =
+      Math.floor(differenceInTime / (1000 * 3600 * 24)) * -1;
+    let deadlineBG = cardClone.querySelector(".card-deadline");
+    let deadlineBGColor = "red";
+    if (daysToDeadline > 10) {
+      deadlineBGColor = "green";
+    } else if (daysToDeadline > 5) {
+      deadlineBGColor = "yellow";
+    }
+    deadlineBG.style.backgroundColor = deadlineBGColor;
+    cardClone.querySelector(".card-deadline").classList.remove("hidden");
+  }
   document.querySelector(cardList).appendChild(cardClone);
 }
 
@@ -53,30 +85,58 @@ function activateNewCardBtns() {
   function activateBtn(btn) {
     btn.classList.add("hide");
     btn.nextElementSibling.classList.remove("hide");
+    btn.nextElementSibling.querySelector(".textarea").focus();
     if (btn.dataset.activatedBefore === "true") {
-      console.log("second click");
       return;
     }
     btn.dataset.activatedBefore = "true";
+
     setTimeout(activateCardBtns, 100);
+
     function activateCardBtns() {
       const container = btn.nextElementSibling;
-      container.querySelector(".add").addEventListener("click", postToDatabase);
-      container.querySelector(".cancel").addEventListener("click", cancelNC);
+      container.querySelector(".add").addEventListener("click", checkInput);
+      container
+        .querySelector(".cancel")
+        .addEventListener("click", () => cancelNC(container));
+      container
+        .querySelector("[role='textbox']")
+        .addEventListener("input", () => {
+          if (container.querySelector("[role='textbox']").textContent === "") {
+            container.dataset.validity = "invalid";
+          } else {
+            container.dataset.validity = "valid";
+          }
+        });
+      function checkInput() {
+        if (container.querySelector("[role='textbox']").textContent === "") {
+          container.dataset.validity = "invalid";
+          container.querySelector("[role='textbox']").focus();
+          return;
+        } else if (!container.querySelector("input").checkValidity()) {
+          container.querySelector("input").focus();
+          return;
+        }
+
+        container.dataset.validity = "";
+        postToDatabase();
+      }
+
       function postToDatabase() {
-        console.log(container.querySelector("[role='textbox']").textContent);
-        console.log(container.parentNode.parentNode.id);
         const data = {
           card_content: container.querySelector("[role='textbox']").textContent,
           active_list: container.parentNode.parentNode.id,
+          deadline: container.querySelector("input").value,
         };
+        container.querySelector("[role='textbox']").textContent = "";
         post(data);
         btn.classList.remove("hide");
         btn.nextElementSibling.classList.add("hide");
         return;
       }
     }
-    function cancelNC() {
+    function cancelNC(container) {
+      container.dataset.validity = "";
       btn.classList.remove("hide");
       btn.nextElementSibling.classList.add("hide");
     }
@@ -99,7 +159,6 @@ function openModal() {
       )}"]`
     )
     .classList.add("hide");
-  const eventCard = event.target.parentNode;
   const modal = document.querySelector("#modal");
   modal.querySelector(
     "span"

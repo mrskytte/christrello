@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Christrello</title>
+    <script
+      src="https://kit.fontawesome.com/4f21456308.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -44,11 +48,21 @@
             <span class="plus">+</span> Add another card
           </button>
           <div class="add-new-container hide">
-            <p>
-              <span class="card textarea" role="textbox" contenteditable></span>
-            </p>
-            <button class="add">Add card</button>
-            <button class="cancel">X</button>
+            <form>
+              <p>
+                <span
+                  class="card textarea"
+                  role="textbox"
+                  contenteditable
+                ></span>
+                <i class="fas fa-exclamation-circle"></i>
+              </p>
+              <p class="error">Remember to add information to the card</p>
+              <label for="deadline">Deadline</label>
+              <input type="date" name="deadline" id="deadline" />
+              <button type="button" class="add">Add card</button>
+              <button type="button" class="cancel">X</button>
+            </form>
           </div>
         </div>
       </div>
@@ -96,6 +110,9 @@
         <p class="card-content">
           hello my peoeple
         </p>
+        <div class="card-deadline hidden">
+          <p>20 Apr</p>
+        </div>
       </div>
     </template>
     <script src="script.js"></script>
